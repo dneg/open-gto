@@ -1,0 +1,11 @@
+#!/bin/csh -f
+#
+# Use this script to re-generate the parser.  Normally, this 
+# is not required, as the resulting files are part of the
+# distribution.
+#
+set verbose
+
+bison -t -dv -p wfobj -o Grammar.c Grammar.y
+mv Grammar.c Grammar.cpp 
+flex -Pwfobj -oLexer.cpp Lexer.l

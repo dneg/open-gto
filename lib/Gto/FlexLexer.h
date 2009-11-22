@@ -171,7 +171,7 @@ public:
 
     virtual int yylex();
     virtual void switch_streams( FLEX_STD istream* new_in, FLEX_STD ostream* new_out );
-#if GTO_FLEX_MINOR_VERSION >= 33
+#if YY_FLEX_SUBMINOR_VERSION >= 33
     virtual int yywrap();
 #endif
 
