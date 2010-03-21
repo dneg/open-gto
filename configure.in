@@ -41,7 +41,7 @@ fi
 
 dnl ********************** Processing starts here...
 
-AC_INIT(Gto, 3.5.3)
+AC_INIT(open-gto, 3.5.3)
 dnl AC_PREREQ(2.57)
 
 AC_CONFIG_AUX_DIR(config)
@@ -125,7 +125,7 @@ fi
 AC_SUBST([CYCLE_OBJ])
 if test `uname` = Linux; then
         # Keeps maya includes from complaining about deprecated #pragmas
-        AC_DEFINE( LINUX )
+        AC_DEFINE(LINUX)
 fi
 
 AC_MSG_CHECKING(for ios_base)
