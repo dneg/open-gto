@@ -41,6 +41,8 @@
 #include <vector>
 #include <fnmatch.h>
 #include <sys/types.h>
+#include <string.h>
+#include <stdlib.h>
 
 #ifdef WIN32
 #include <pcreposix.h>

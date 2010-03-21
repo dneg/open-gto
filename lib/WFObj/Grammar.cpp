@@ -99,6 +99,7 @@
 
 #include <vector>
 #include <string>
+#include <string.h>
 #include "Reader.h"
 
 #define yyLineNum wfobjLineNum
@@ -164,7 +165,7 @@ void yyerror(const char*);
 
 
 /* Line 189 of yacc.c  */
-#line 168 "Grammar.c"
+#line 169 "Grammar.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -224,7 +225,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 91 "Grammar.y"
+#line 92 "Grammar.y"
 
     int		_token;
     float	_float;
@@ -235,7 +236,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 239 "Grammar.c"
+#line 240 "Grammar.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -247,7 +248,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 251 "Grammar.c"
+#line 252 "Grammar.c"
 
 #ifdef short
 # undef short
@@ -548,11 +549,11 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   140,   140,   141,   145,   146,   147,   152,   152,   157,
-     157,   162,   162,   167,   167,   172,   172,   177,   177,   182,
-     182,   187,   192,   197,   202,   208,   214,   220,   226,   232,
-     238,   244,   250,   258,   259,   263,   269,   275,   281,   289,
-     290,   294,   295,   299,   303,   304,   308,   309,   313,   314
+       0,   141,   141,   142,   146,   147,   148,   153,   153,   158,
+     158,   163,   163,   168,   168,   173,   173,   178,   178,   183,
+     183,   188,   193,   198,   203,   209,   215,   221,   227,   233,
+     239,   245,   251,   259,   260,   264,   270,   276,   282,   290,
+     291,   295,   296,   300,   304,   305,   309,   310,   314,   315
 };
 #endif
 
@@ -1500,35 +1501,35 @@ yyreduce:
         case 4:
 
 /* Line 1455 of yacc.c  */
-#line 145 "Grammar.y"
+#line 146 "Grammar.y"
     { yyLineNum++; ;}
     break;
 
   case 5:
 
 /* Line 1455 of yacc.c  */
-#line 146 "Grammar.y"
+#line 147 "Grammar.y"
     { yyLineNum++; ;}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 147 "Grammar.y"
+#line 148 "Grammar.y"
     { yyLineNum++; ;}
     break;
 
   case 7:
 
 /* Line 1455 of yacc.c  */
-#line 152 "Grammar.y"
+#line 153 "Grammar.y"
     { clear_vertex(); ;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
-#line 153 "Grammar.y"
+#line 154 "Grammar.y"
     { 
 	    if (vertex(VERTEX)) YYERROR;
 	;}
@@ -1537,14 +1538,14 @@ yyreduce:
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 157 "Grammar.y"
+#line 158 "Grammar.y"
     { clear_vertex(); ;}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 158 "Grammar.y"
+#line 159 "Grammar.y"
     { 
 	    if (vertex(VNORMAL)) YYERROR;
 	;}
@@ -1553,14 +1554,14 @@ yyreduce:
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 162 "Grammar.y"
+#line 163 "Grammar.y"
     { clear_vertex(); ;}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 163 "Grammar.y"
+#line 164 "Grammar.y"
     { 
 	    if (vertex(VTEXTURE)) YYERROR;
 	;}
@@ -1569,14 +1570,14 @@ yyreduce:
   case 13:
 
 /* Line 1455 of yacc.c  */
-#line 167 "Grammar.y"
+#line 168 "Grammar.y"
     { clear_element(); ;}
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
-#line 168 "Grammar.y"
+#line 169 "Grammar.y"
     { 
 	    if (element(FACE)) YYERROR;
 	;}
@@ -1585,14 +1586,14 @@ yyreduce:
   case 15:
 
 /* Line 1455 of yacc.c  */
-#line 172 "Grammar.y"
+#line 173 "Grammar.y"
     { clear_element(); ;}
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 173 "Grammar.y"
+#line 174 "Grammar.y"
     { 
 	    if (element(LINE)) YYERROR;
 	;}
@@ -1601,14 +1602,14 @@ yyreduce:
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 177 "Grammar.y"
+#line 178 "Grammar.y"
     { clear_element(); ;}
     break;
 
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 178 "Grammar.y"
+#line 179 "Grammar.y"
     { 
 	    if (element(POINT)) YYERROR;
 	;}
@@ -1617,14 +1618,14 @@ yyreduce:
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 182 "Grammar.y"
+#line 183 "Grammar.y"
     { clear_groups(); ;}
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
-#line 183 "Grammar.y"
+#line 184 "Grammar.y"
     { 
 	    group_statement(); 
 	;}
@@ -1633,7 +1634,7 @@ yyreduce:
   case 21:
 
 /* Line 1455 of yacc.c  */
-#line 188 "Grammar.y"
+#line 189 "Grammar.y"
     { 
 	    smoothing_group((yyvsp[(2) - (2)]._int)); 
 	;}
@@ -1642,7 +1643,7 @@ yyreduce:
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 193 "Grammar.y"
+#line 194 "Grammar.y"
     { 
 	    if (smoothing_group_off((yyvsp[(2) - (2)]._name))) YYERROR;
 	;}
@@ -1651,7 +1652,7 @@ yyreduce:
   case 23:
 
 /* Line 1455 of yacc.c  */
-#line 198 "Grammar.y"
+#line 199 "Grammar.y"
     {
 	    active_object((yyvsp[(2) - (2)]._name));
 	;}
@@ -1660,7 +1661,7 @@ yyreduce:
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 203 "Grammar.y"
+#line 204 "Grammar.y"
     {
 	    if ((state.bevel = on_off_only((yyvsp[(2) - (2)]._name))) == -1) YYERROR;
 	    else yyReader->bevel(state.bevel);
@@ -1670,7 +1671,7 @@ yyreduce:
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 209 "Grammar.y"
+#line 210 "Grammar.y"
     {
 	    if ((state.cinterp = on_off_only((yyvsp[(2) - (2)]._name))) == -1) YYERROR;
 	    else yyReader->cinterp(state.cinterp);
@@ -1680,7 +1681,7 @@ yyreduce:
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 215 "Grammar.y"
+#line 216 "Grammar.y"
     {
 	    if ((state.dinterp = on_off_only((yyvsp[(2) - (2)]._name))) == -1) YYERROR;
 	    else yyReader->dinterp(state.dinterp);
@@ -1690,7 +1691,7 @@ yyreduce:
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 221 "Grammar.y"
+#line 222 "Grammar.y"
     {
 	    state.mtl = (yyvsp[(2) - (2)]._name);
 	    yyReader->usemtl(state.mtl);
@@ -1700,7 +1701,7 @@ yyreduce:
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 227 "Grammar.y"
+#line 228 "Grammar.y"
     {
 	    state.map = (yyvsp[(2) - (2)]._name);
 	    yyReader->usemap(state.map);
@@ -1710,7 +1711,7 @@ yyreduce:
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 233 "Grammar.y"
+#line 234 "Grammar.y"
     {
 	    state.mtllib = (yyvsp[(2) - (2)]._name);
 	    yyReader->mtllib(state.mtllib);
@@ -1720,7 +1721,7 @@ yyreduce:
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 239 "Grammar.y"
+#line 240 "Grammar.y"
     {
 	    state.shadow_obj = (yyvsp[(2) - (2)]._name);
 	    yyReader->shadow_obj(state.shadow_obj);
@@ -1730,7 +1731,7 @@ yyreduce:
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 245 "Grammar.y"
+#line 246 "Grammar.y"
     {
 	    state.trace_obj = (yyvsp[(2) - (2)]._name);
 	    yyReader->trace_obj(state.trace_obj);
@@ -1740,7 +1741,7 @@ yyreduce:
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 251 "Grammar.y"
+#line 252 "Grammar.y"
     {
 	    state.lod = (yyvsp[(2) - (2)]._int);
 	    yyReader->lod(state.lod);
@@ -1750,7 +1751,7 @@ yyreduce:
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 264 "Grammar.y"
+#line 265 "Grammar.y"
     { 
 	    (yyval._flags)=1; 
 	    if (index(1,(yyvsp[(1) - (1)]._int),0,0)) YYERROR;
@@ -1760,7 +1761,7 @@ yyreduce:
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 270 "Grammar.y"
+#line 271 "Grammar.y"
     { 
 	    (yyval._flags)=3; 
 	    if (index(3,(yyvsp[(1) - (3)]._int),(yyvsp[(3) - (3)]._int),0)) YYERROR;
@@ -1770,7 +1771,7 @@ yyreduce:
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 276 "Grammar.y"
+#line 277 "Grammar.y"
     { 
 	    (yyval._flags)=5;
 	    if (index(5,(yyvsp[(1) - (4)]._int),0,(yyvsp[(4) - (4)]._int))) YYERROR;
@@ -1780,7 +1781,7 @@ yyreduce:
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 282 "Grammar.y"
+#line 283 "Grammar.y"
     { 
 	    (yyval._flags)=7; 
 	    if (index(7,(yyvsp[(1) - (5)]._int),(yyvsp[(3) - (5)]._int),(yyvsp[(5) - (5)]._int))) YYERROR;
@@ -1790,56 +1791,56 @@ yyreduce:
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 289 "Grammar.y"
+#line 290 "Grammar.y"
     { add_to_vertex((yyvsp[(1) - (1)]._float)); ;}
     break;
 
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 290 "Grammar.y"
+#line 291 "Grammar.y"
     { add_to_vertex((yyvsp[(2) - (2)]._float)); ;}
     break;
 
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 295 "Grammar.y"
+#line 296 "Grammar.y"
     { (yyval._float) = float((yyvsp[(1) - (1)]._int)); ;}
     break;
 
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 303 "Grammar.y"
+#line 304 "Grammar.y"
     { (yyval._int) = -1; ;}
     break;
 
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 308 "Grammar.y"
+#line 309 "Grammar.y"
     { add_group(""); ;}
     break;
 
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 309 "Grammar.y"
+#line 310 "Grammar.y"
     { add_group((yyvsp[(1) - (1)]._name)); ;}
     break;
 
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 314 "Grammar.y"
+#line 315 "Grammar.y"
     { add_group((yyvsp[(2) - (2)]._name)); ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1843 "Grammar.c"
+#line 1844 "Grammar.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2051,7 +2052,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 317 "Grammar.y"
+#line 318 "Grammar.y"
 
 
 

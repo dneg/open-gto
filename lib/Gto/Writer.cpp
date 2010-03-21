@@ -45,6 +45,8 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdexcept>
+#include <string.h>
+#include <stdlib.h>
 
 #define GTO_DEBUG 0
 

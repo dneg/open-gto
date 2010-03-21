@@ -36,6 +36,7 @@
 #include <Gto/Utilities.h>
 #include <assert.h>
 #include <fstream>
+#include <stdlib.h>
 #ifdef GTO_SUPPORT_ZIP
 #include <zlib.h>
 #endif

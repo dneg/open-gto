@@ -41,6 +41,8 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <string.h>
+#include <stdlib.h>
 
 using namespace Gto;
 using namespace std;
@@ -479,7 +481,7 @@ int main(int argc, char *argv[])
 {
     char* inFile     = 0;
     char* outFile    = 0;
-    char* protocol   = GTO_PROTOCOL_POLYGON;
+    const char* protocol   = GTO_PROTOCOL_POLYGON;
     char* outObj     = 0;
     int   nocompress = 0;
     int   text       = 0;

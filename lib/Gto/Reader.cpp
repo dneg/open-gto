@@ -44,6 +44,8 @@
 #ifdef GTO_SUPPORT_ZIP
 #include <zlib.h>
 #endif
+#include <string.h>
+#include <stdlib.h>
 
 int GTOParse(Gto::Reader*);
 

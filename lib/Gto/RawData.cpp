@@ -35,6 +35,7 @@
 //
 #include <Gto/RawData.h>
 #include <iostream>
+#include <stdlib.h>
 
 namespace Gto {
 using namespace std;

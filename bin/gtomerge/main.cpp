@@ -38,6 +38,8 @@
 #include <fstream>
 #include <stdio.h>
 #include <vector>
+#include <string.h>
+#include <stdlib.h>
 
 using namespace Gto;
 using namespace std;

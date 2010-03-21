@@ -20,6 +20,7 @@
 
 #include <vector>
 #include <string>
+#include <string.h>
 #include "Reader.h"
 
 #define yyLineNum wfobjLineNum

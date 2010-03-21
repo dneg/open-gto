@@ -94,6 +94,7 @@ typedef unsigned int flex_uint32_t;
 /* begin standard C++ headers. */
 #include <iostream> 
 #include <errno.h>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 /* end standard C++ headers. */
@@ -567,7 +568,7 @@ extern int	GTOdebug;
 
 
 
-#line 571 "FlexLexer.cpp"
+#line 572 "FlexLexer.cpp"
 
 #define INITIAL 0
 #define COMMENT 1
@@ -672,7 +673,7 @@ YY_DECL
 #line 70 "Lexer.l"
 
 
-#line 676 "FlexLexer.cpp"
+#line 677 "FlexLexer.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -1011,7 +1012,7 @@ YY_RULE_SETUP
 #line 187 "Lexer.l"
 ECHO;
 	YY_BREAK
-#line 1015 "FlexLexer.cpp"
+#line 1016 "FlexLexer.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
