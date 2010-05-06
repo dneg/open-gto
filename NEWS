@@ -8,6 +8,8 @@
 
     * Minor patches to GtoContainer C++ lib
 
+    * License changed to BSD: http://www.opensource.org/licenses/bsd-license.php
+
 
 * Version 3.5.1
 
@@ -65,21 +67,21 @@
 * Version 3.2
 
       o Added RiGtoPlugin and RiGtoRibOut to the distribution.  RiGtoPlugin
-      should work with most Renderman®-compliant renderers that support the 
+      should work with most Renderman®-compliant renderers that support the
       RiProcedural DynamicLoad RIB token.  The plugin will read geometry from
-      a gto file and hand it directly to the renderer, eliminating the 
+      a gto file and hand it directly to the renderer, eliminating the
       expensive translation to/from ASCII RIB.  For those that don't support
-      DynamicLoad, you may be able to use RiProcedural RunProgram with 
+      DynamicLoad, you may be able to use RiProcedural RunProgram with
       RiGtoRibOut.  See the documentation for more details.
 
       o There is now an online GTO discussion forum.  Hopefully this will
       help to keep protocols standard across facilities as much as possible,
       as well as serve as a repository of GTO software knowlege.  As always,
-      if you're using GTO, we'd love to hear from you!  You can find the 
+      if you're using GTO, we'd love to hear from you!  You can find the
       board at:
-      
+
             http://www.tweakfilms.com/gtoforum/
-      
+
       o I added an "html" target in the ./doc directory.  It isn't built by
       default, but just type "make html" in there if you want html docs.
 
@@ -90,11 +92,11 @@
 
 * Version 3.0
 
-      o Included gtoContainer.py (self-documenting module) plus usage examples 
+      o Included gtoContainer.py (self-documenting module) plus usage examples
         in python/gtoContainer.
 
       o configure script now works with Maya 4.x and Maya 5.x
-      
+
       o An interpretation string has been added to the property header.
 
       o An additional uint32 has been added as padding to the object,
@@ -118,7 +120,7 @@
         rejected.
 
       o A new protocol "channel" is introduced for assigning mapped surface
-        varying data on geometry. An arbitrary number of texture maps may be 
+        varying data on geometry. An arbitrary number of texture maps may be
         assigned to the geometry. See section 6.13 Channels Protocol.
 
       o The material protocol has been fleshed out. See section 6.8 Material
@@ -134,5 +136,5 @@
 
 * Version 2.0 File headers changed. The format is not compatible with 1.0.
 
-* Version 1.0 
+* Version 1.0
 
