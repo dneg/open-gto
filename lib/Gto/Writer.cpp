@@ -1,7 +1,7 @@
 //
 //  Copyright (c) 2009, Tweak Software
 //  All rights reserved.
-// 
+//
 //  Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions
 //  are met:
@@ -19,7 +19,7 @@
 //       contributors may be used to endorse or promote products
 //       derived from this software without specific prior written
 //       permission.
-// 
+//
 //  THIS SOFTWARE IS PROVIDED BY Tweak Software ''AS IS'' AND ANY EXPRESS
 //  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 //  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -57,6 +57,9 @@
 
 #ifdef WIN32
 #define snprintf _snprintf
+#include <io.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #endif
 
 namespace Gto {
@@ -142,7 +145,11 @@ Writer::open(const char* filename, FileType type, bool writeIndex)
 #ifdef GTO_SUPPORT_ZIP
     else if (type == CompressedGTO)
     {
+        #ifdef WIN32
+        m_gzRawFd = ::_open( filename, _O_WRONLY|_O_CREAT|_O_TRUNC );
+        #else
         m_gzRawFd = ::open(filename, O_WRONLY|O_CREAT|O_TRUNC, 0666);
+        #endif
 
         if (m_gzRawFd < 0)
         {
@@ -182,7 +189,11 @@ Writer::close()
 #ifdef GTO_SUPPORT_ZIP
     else if ((m_gzRawFd > 0) && m_needsClosing)
     {
+        #ifdef WIN32
+        ::_close(m_gzRawFd);
+        #else
         ::close(m_gzRawFd);
+        #endif
     }
 
     m_gzfile = 0;
@@ -212,7 +223,11 @@ Writer::beginData(const std::string *orderedStrings, int num)
     {
         if(m_type == CompressedGTO)
         {
+            #ifdef WIN32
+            m_gzfile = gzdopen(_dup(m_gzRawFd), "w");
+            #else
             m_gzfile = gzdopen(dup(m_gzRawFd), "w");
+            #endif
             prepIndexTable();
         }
         writeHead();
@@ -886,7 +901,11 @@ Writer::propertyDataRaw(const void* data,
             if( (m_type == CompressedGTO) && m_writeIndexTable )
             {
                 gzflush(m_gzfile, Z_FULL_FLUSH);
+                #ifdef WIN32
+                m_dataOffsets.push_back( _lseek( m_gzRawFd, 0, SEEK_CUR ));
+                #else
                 m_dataOffsets.push_back(lseek(m_gzRawFd, 0, SEEK_CUR));
+                #endif
             }
 #endif
             write(data, dataSize(m_properties[p].type) * n);
@@ -906,24 +925,24 @@ Writer::prepIndexTable()
     //
     // Write the FLG header field
     //
-    fseek(s->file, 3L, SEEK_SET);
-    fprintf(s->file, "%c", EXTRA_FIELD);
+    fseek(s->gto_z_file, 3L, SEEK_SET);
+    fprintf(s->gto_z_file, "%c", EXTRA_FIELD);
 
     //
     // Write the XLEN extra field length
     //
     unsigned short xlen = 2 * sizeof(unsigned int);
-    fseek(s->file, 10L, SEEK_SET);
-    fwrite(&xlen, 1, sizeof(unsigned short), s->file);
+    fseek(s->gto_z_file, 10L, SEEK_SET);
+    fwrite(&xlen, 1, sizeof(unsigned short), s->gto_z_file);
 
     //
     // Leave space for the index table offset and size
     //
     unsigned int placeholders[2] = {0, 0};
-    fwrite(placeholders, sizeof(unsigned int), 2, s->file);
+    fwrite(placeholders, sizeof(unsigned int), 2, s->gto_z_file);
 
     gzflush(m_gzfile, Z_FULL_FLUSH);
-    s->start = ftell(s->file);
+    s->gto_start = ftell(s->gto_z_file);
 }
 
 
@@ -937,9 +956,13 @@ Writer::writeIndexTable()
 
     //
     // Lay down a gzip marker and remember where it is
-    //    
+    //
     gzflush(m_gzfile, Z_FULL_FLUSH);
+    #ifdef WIN32
+    unsigned int indexTableOffset = _lseek(m_gzRawFd, 0, SEEK_CUR);
+    #else
     unsigned int indexTableOffset = lseek(m_gzRawFd, 0, SEEK_CUR);
+    #endif
     unsigned int indexTableSize = m_dataOffsets.size();
 
     //
@@ -955,24 +978,30 @@ Writer::writeIndexTable()
 
     //
     // Write the index table into the gzip stream
-    //    
+    //
     int w = gzwrite(m_gzfile, &m_dataOffsets.front(),
                     m_dataOffsets.size() * sizeof(unsigned int));
 
     //
     // Close the gzip file.  Must be done before lseeking back
-    // to the header in the next step.  I believe this writes 
+    // to the header in the next step.  I believe this writes
     // the CRC32 and ISIZE fields at the end of the file.
-    //    
+    //
     gzclose(m_gzfile);
 
     //
-    // Write the raw offset to the index table into the 
+    // Write the raw offset to the index table into the
     // 'extra' gzip header field.
-    //    
+    //
+    #ifdef WIN32
+    _lseek(m_gzRawFd, 12L, SEEK_SET);
+    ::_write(m_gzRawFd, &indexTableOffset, sizeof(unsigned int));
+    ::_write(m_gzRawFd, &indexTableSize, sizeof(unsigned int));
+    #else
     lseek(m_gzRawFd, 12L, SEEK_SET);
     ::write(m_gzRawFd, &indexTableOffset, sizeof(unsigned int));
     ::write(m_gzRawFd, &indexTableSize, sizeof(unsigned int));
+    #endif
 }
 
 

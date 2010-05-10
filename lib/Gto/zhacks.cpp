@@ -1,7 +1,7 @@
 //
 //  Copyright (c) 2009, Tweak Software
 //  All rights reserved.
-// 
+//
 //  Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions
 //  are met:
@@ -19,7 +19,7 @@
 //       contributors may be used to endorse or promote products
 //       derived from this software without specific prior written
 //       permission.
-// 
+//
 //  THIS SOFTWARE IS PROVIDED BY Tweak Software ''AS IS'' AND ANY EXPRESS
 //  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 //  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -40,18 +40,18 @@ z_off_t gzseek_raw(gzFile file, z_off_t raw_offset)
 {
     gz_stream *s = (gz_stream*)file;
 
-    if (s == NULL || s->mode != 'r') return -1;
+    if (s == NULL || s->gto_mode != 'r') return -1;
 
-    s->start = raw_offset;
+    s->gto_start = raw_offset;
 
-    s->z_err = Z_OK;
-    s->z_eof = 0;
-    s->back = EOF;
-    s->stream.avail_in = 0;
-    s->stream.next_in = s->inbuf;
-    s->crc = crc32(0L, Z_NULL, 0);
-    inflateReset(&s->stream);
-    s->in = 0;
-    s->out = 0;
-    return fseek(s->file, s->start, SEEK_SET);
+    s->gto_z_err = Z_OK;
+    s->gto_z_eof = 0;
+    s->gto_back = EOF;
+    s->gto_stream.avail_in = 0;
+    s->gto_stream.next_in = s->gto_inbuf;
+    s->gto_crc = crc32(0L, Z_NULL, 0);
+    inflateReset(&s->gto_stream);
+    s->gto_in = 0;
+    s->gto_out = 0;
+    return fseek(s->gto_z_file, s->gto_start, SEEK_SET);
 }

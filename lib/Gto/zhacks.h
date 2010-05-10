@@ -8,7 +8,7 @@
 //
 //  Copyright (c) 2009, Tweak Software
 //  All rights reserved.
-// 
+//
 //  Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions
 //  are met:
@@ -26,7 +26,7 @@
 //       contributors may be used to endorse or promote products
 //       derived from this software without specific prior written
 //       permission.
-// 
+//
 //  THIS SOFTWARE IS PROVIDED BY Tweak Software ''AS IS'' AND ANY EXPRESS
 //  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 //  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -43,38 +43,31 @@
 
 #define EXTRA_FIELD  0x04 /* bit 2 set: extra field present */
 
-//
-// This the the internal struct behind zlib's 'gzFile' type, which is
-// typedef'd to a void pointer in zlib.h.  We need access to a couple
-// of things the library doesn't normally provide.  The alternative 
-// was to re-implement all the gz* functions ourselves.
-//
-typedef struct gz_stream {
-    z_stream stream;
-    int      z_err;   /* error code for last stream operation */
-    int      z_eof;   /* set if end of input file */
-    FILE     *file;   /* .gz file */
-    Byte     *inbuf;  /* input buffer */
-    Byte     *outbuf; /* output buffer */
-    uLong    crc;     /* crc32 of uncompressed data */
-    char     *msg;    /* error message */
-    char     *path;   /* path name for debugging only */
-    int      transparent; /* 1 if input file is not a .gz file */
-    char     mode;    /* 'w' or 'r' */
-    z_off_t  start;   /* start of compressed data in file (header skipped) */
-    z_off_t  in;      /* bytes into deflate or inflate */
-    z_off_t  out;     /* bytes out of deflate or inflate */
-    int      back;    /* one character push-back */
-    int      last;    /* true if push-back is last character */
-} gz_stream;
-
 
 //
 // Seek directly to a flush point in a gz file.  Also resets
-// the decompressor.  No checking is done to make sure there 
+// the decompressor.  No checking is done to make sure there
 // is actually a flush point at the given offset.
 //
 z_off_t gzseek_raw(gzFile file, z_off_t raw_offset);
 
+
+//
+// We need to access some fields from a zlib gz_stream through an opaque
+// pointer, so we roll our own.  In this instance, "GTO" is properly
+// pronounced "ghetto".
+//
+typedef struct gz_stream {
+    z_stream gto_stream;
+    int      gto_z_err, gto_z_eof;
+    FILE     *gto_z_file;
+    Byte     *gto_inbuf, *__foo2;
+    uLong    gto_crc;
+    char     *__foo3, *__foo4;
+    int       __foo0;
+    char     gto_mode;
+    z_off_t  gto_start, gto_in, gto_out;
+    int      gto_back, gto_last;
+} gz_stream;
 
 #endif    // End #ifdef __ZHACKS_H__
